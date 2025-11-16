@@ -1,12 +1,15 @@
 FROM n8nio/n8n:latest
 
-# Let n8n listen on the correct port for Render
-ENV N8N_PORT=10000
+# Set working directory
+WORKDIR /data
+
+# n8n listens on this port
+ENV N8N_PORT=5678
 ENV N8N_PROTOCOL=http
-ENV WEBHOOK_TUNNEL_URL=""
+ENV N8N_HOST=0.0.0.0
+ENV N8N_LOG_LEVEL=debug
 
-# Expose port
-EXPOSE 10000
+EXPOSE 5678
 
-# Start n8n
-CMD ["n8n", "start"]
+# Start n8n with correct path
+CMD ["node", "/usr/local/lib/node_modules/n8n/bin/n8n"]
